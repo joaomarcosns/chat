@@ -23,69 +23,21 @@ import AppLayout from "@/Layouts/AppLayout.vue";
                         <ul>
                             <li
                                 class="p-6 text-lg text-gray-600 leading-7 font-semibold border-b border-gray-200 hover:bg-gray-200 hover:bg-opacity-50 hover:cursor-pointer"
+                                v-for="(user, index) in users"
+                                :key="index"
+                                @click="
+                                    () => {
+                                        loadingMessage(user.id);
+                                    }
+                                "
+                                :class="
+                                    userActive && userActive.id === user.id
+                                        ? 'bg-gray-200 bg-opacity-50'
+                                        : ''
+                                "
                             >
                                 <p class="flex items-center">
-                                    JOAO MARCOS
-                                    <span
-                                        class="ml-2 w-2 h-2 bg-blue-500 rounded-full"
-                                    ></span>
-                                </p>
-                            </li>
-                            <li
-                                class="p-6 text-lg text-gray-600 leading-7 font-semibold border-b border-gray-200 hover:bg-gray-200 hover:bg-opacity-50 hover:cursor-pointer"
-                            >
-                                <p class="flex items-center">
-                                    Isabela
-                                    <span
-                                        class="ml-2 w-2 h-2 bg-blue-500 rounded-full"
-                                    ></span>
-                                </p>
-                            </li>
-                            <li
-                                class="p-6 text-lg text-gray-600 leading-7 font-semibold border-b border-gray-200 hover:bg-gray-200 hover:bg-opacity-50 hover:cursor-pointer"
-                            >
-                                <p class="flex items-center">
-                                    Isabella
-                                    <span
-                                        class="ml-2 w-2 h-2 bg-blue-500 rounded-full"
-                                    ></span>
-                                </p>
-                            </li>
-                            <li
-                                class="p-6 text-lg text-gray-600 leading-7 font-semibold border-b border-gray-200 hover:bg-gray-200 hover:bg-opacity-50 hover:cursor-pointer"
-                            >
-                                <p class="flex items-center">
-                                    Isabella
-                                    <span
-                                        class="ml-2 w-2 h-2 bg-blue-500 rounded-full"
-                                    ></span>
-                                </p>
-                            </li>
-                            <li
-                                class="p-6 text-lg text-gray-600 leading-7 font-semibold border-b border-gray-200 hover:bg-gray-200 hover:bg-opacity-50 hover:cursor-pointer"
-                            >
-                                <p class="flex items-center">
-                                    Isabella
-                                    <span
-                                        class="ml-2 w-2 h-2 bg-blue-500 rounded-full"
-                                    ></span>
-                                </p>
-                            </li>
-                            <li
-                                class="p-6 text-lg text-gray-600 leading-7 font-semibold border-b border-gray-200 hover:bg-gray-200 hover:bg-opacity-50 hover:cursor-pointer"
-                            >
-                                <p class="flex items-center">
-                                    Isabella
-                                    <span
-                                        class="ml-2 w-2 h-2 bg-blue-500 rounded-full"
-                                    ></span>
-                                </p>
-                            </li>
-                            <li
-                                class="p-6 text-lg text-gray-600 leading-7 font-semibold border-b border-gray-200 hover:bg-gray-200 hover:bg-opacity-50 hover:cursor-pointer"
-                            >
-                                <p class="flex items-center">
-                                    Isabella
+                                    {{ user.name }}
                                     <span
                                         class="ml-2 w-2 h-2 bg-blue-500 rounded-full"
                                     ></span>
@@ -94,134 +46,42 @@ import AppLayout from "@/Layouts/AppLayout.vue";
                         </ul>
                     </div>
                     <!-- box message -->
-                    <div class="w-9/12 flex flex-col justify-between ">
+                    <div class="w-9/12 flex flex-col justify-between">
                         <!-- Message -->
                         <div class="w-full p-6 flex flex-col overflow-y-scroll">
-                            <div class="w-full mb-3 text-right">
+                            <div
+                                class="w-full mb-3 message"
+                                v-for="(message, index) in messages"
+                                :key="index"
+                                :class="
+                                    message.from === $page.props.auth.user.id
+                                        ? 'text-right'
+                                        : ''
+                                "
+                            >
                                 <p
-                                    class="inline-block p-2 rounded-md messageFromMe"
+                                    class="inline-block p-2 rounded-md"
                                     style="max-width: 75%"
+                                    :class="
+                                        message.from ===
+                                        $page.props.auth.user.id
+                                            ? 'messageFromMe'
+                                            : 'messageToMe'
+                                    "
                                 >
-                                    Olá!
+                                    {{ message.content }}
                                 </p>
-                                <span class="block mt-1 text-gray-500"
-                                    >21/10/2023 17:44</span
-                                >
-                            </div>
-
-                            <div class="w-full mb-3">
-                                <p
-                                    class="inline-block p-2 rounded-md messageToMe"
-                                    style="max-width: 75%"
-                                >
-                                    Oi!
-                                </p>
-                                <span class="block mt-1 text-gray-500"
-                                    >21/10/2023 17:44</span
-                                >
-                            </div>
-
-                            <div class="w-full mb-3">
-                                <p
-                                    class="inline-block p-2 rounded-md messageToMe"
-                                    style="max-width: 75%"
-                                >
-                                    Oi!
-                                </p>
-                                <span class="block mt-1 text-gray-500"
-                                    >21/10/2023 17:44</span
-                                >
-                            </div>
-
-                            <div class="w-full mb-3">
-                                <p
-                                    class="inline-block p-2 rounded-md messageToMe"
-                                    style="max-width: 75%"
-                                >
-                                    Oi!
-                                </p>
-                                <span class="block mt-1 text-gray-500"
-                                    >21/10/2023 17:44</span
-                                >
-                            </div>
-
-                            <div class="w-full mb-3">
-                                <p
-                                    class="inline-block p-2 rounded-md messageToMe"
-                                    style="max-width: 75%"
-                                >
-                                    Oi!
-                                </p>
-                                <span class="block mt-1 text-gray-500"
-                                    >21/10/2023 17:44</span
-                                >
-                            </div>
-
-                            <div class="w-full mb-3">
-                                <p
-                                    class="inline-block p-2 rounded-md messageToMe"
-                                    style="max-width: 75%"
-                                >
-                                    Oi!
-                                </p>
-                                <span class="block mt-1 text-gray-500"
-                                    >21/10/2023 17:44</span
-                                >
-                            </div>
-
-                            <div class="w-full mb-3">
-                                <p
-                                    class="inline-block p-2 rounded-md messageToMe"
-                                    style="max-width: 75%"
-                                >
-                                    Oi!
-                                </p>
-                                <span class="block mt-1 text-gray-500"
-                                    >21/10/2023 17:44</span
-                                >
-                            </div>
-
-                            <div class="w-full mb-3">
-                                <p
-                                    class="inline-block p-2 rounded-md messageToMe"
-                                    style="max-width: 75%"
-                                >
-                                    Oi!
-                                </p>
-                                <span class="block mt-1 text-gray-500"
-                                    >21/10/2023 17:44</span
-                                >
-                            </div>
-
-                            <div class="w-full mb-3">
-                                <p
-                                    class="inline-block p-2 rounded-md messageToMe"
-                                    style="max-width: 75%"
-                                >
-                                    Oi!
-                                </p>
-                                <span class="block mt-1 text-gray-500"
-                                    >21/10/2023 17:44</span
-                                >
-                            </div>
-
-                            <div class="w-full mb-3">
-                                <p
-                                    class="inline-block p-2 rounded-md messageToMe"
-                                    style="max-width: 75%"
-                                >
-                                    Oi!
-                                </p>
-                                <span class="block mt-1 text-gray-500"
-                                    >21/10/2023 17:44</span
-                                >
+                                <span class="block mt-1 text-gray-500">{{
+                                    formattedData(message.created_at)
+                                }}</span>
                             </div>
                         </div>
                         <!-- form -->
                         <div
                             class="w-full bg-gray-200 bg-opacity-25 p-6 border-t border-gray-300"
+                            v-if="userActive"
                         >
-                            <form>
+                            <form v-on:submit.prevent="sendMessage">
                                 <div
                                     class="flex rounded-md overflow-hidden border border-gray-300"
                                 >
@@ -233,6 +93,7 @@ import AppLayout from "@/Layouts/AppLayout.vue";
                                         id="inputField"
                                         class="flex-1 px-4 py-2 text-sm focus:outline-none"
                                         placeholder="Digite algo"
+                                        v-model="message"
                                     />
                                     <button
                                         type="submit"
@@ -250,7 +111,95 @@ import AppLayout from "@/Layouts/AppLayout.vue";
     </AppLayout>
 </template>
 
-<script setup></script>
+<script>
+import axios from "axios";
+import moment from "moment";
+
+export default {
+    data() {
+        return {
+            users: [],
+            messages: [],
+            userActive: null,
+            message: "",
+        };
+    },
+    mounted() {
+        axios
+            .get("/api/users")
+            .then((response) => {
+                this.users = response.data.data;
+            })
+            .catch((error) => {
+                console.log(error.data.message);
+            });
+    },
+    methods: {
+        scrollToBottom() {
+            this.$nextTick(() => {
+                if (this.messages.length) {
+                    const lastMessage = document.querySelector(
+                        ".message:last-child"
+                    );
+                    if (lastMessage) {
+                        lastMessage.scrollIntoView();
+                    }
+                }
+            });
+        },
+        async loadingMessage(userId) {
+            axios
+                .get(`/api/users/${userId}`)
+                .then((response) => {
+                    this.userActive = response.data.data;
+                })
+                .catch((error) => {
+                    console.log(error.data.message);
+                });
+
+            await axios
+                .get(`/api/messages/${userId}`)
+                .then((response) => {
+                    this.messages = response.data.data;
+                    this.scrollToBottom();
+                })
+                .catch((error) => {
+                    console.log(error.data.message);
+                });
+        },
+        async sendMessage() {
+            await axios
+                .post(`/api/messages`, {
+                    content: this.message,
+                    to: this.userActive.id,
+                })
+                .then((response) => {
+                    this.messages.push({
+                        from: 1,
+                        to: this.userActive.id,
+                        content: this.message,
+                        created_at: new Date().toISOString(),
+                        updated_at: new Date().toISOString(),
+                    });
+                    this.message = "";
+                    this.scrollToBottom();
+                })
+                .catch((error) => {
+                    console.log(error.data.message);
+                });
+        },
+    },
+    computed: {
+        formattedData() {
+            return (value) => {
+                if (value) {
+                    return moment(value).format("DD/MM/YYYY HH:mm");
+                }
+            };
+        },
+    },
+};
+</script>
 
 <style setup>
 .messageFromMe {
@@ -258,5 +207,31 @@ import AppLayout from "@/Layouts/AppLayout.vue";
 }
 .messageToMe {
     @apply bg-gray-300 bg-opacity-25;
+}
+
+/* Track */
+::-webkit-scrollbar {
+    width: 12px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background-color: #888;
+    border-radius: 6px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background-color: #555;
+}
+
+/* Track (background) on hover */
+::-webkit-scrollbar-thumb:active {
+    background-color: #999;
+}
+
+/* Button (up and down arrows) */
+::-webkit-scrollbar-button {
+    display: none;
 }
 </style>
