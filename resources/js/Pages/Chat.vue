@@ -114,6 +114,7 @@ import AppLayout from "@/Layouts/AppLayout.vue";
 <script>
 import axios from "axios";
 import moment from "moment";
+import store from "../store";
 
 export default {
     data() {
@@ -175,7 +176,7 @@ export default {
                 })
                 .then((response) => {
                     this.messages.push({
-                        from: 1,
+                        from: this.user.id,
                         to: this.userActive.id,
                         content: this.message,
                         created_at: new Date().toISOString(),
@@ -196,6 +197,9 @@ export default {
                     return moment(value).format("DD/MM/YYYY HH:mm");
                 }
             };
+        },
+        user() {
+            return store.state.user;
         },
     },
 };

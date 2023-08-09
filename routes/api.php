@@ -25,6 +25,9 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
         Route::get('/', 'index')->name('index');
         Route::get('/{user}', 'show')->name('show');
     });
+    Route::controller(UserController::class)->prefix('user')->name('users.')->group(function () {
+        Route::get('/', 'me')->name('me');
+    });
 
     Route::controller(MessagesController::class)->prefix('messages')->name('users.')->group(function () {
         Route::get('/{user}', 'listMessages')->name('index');

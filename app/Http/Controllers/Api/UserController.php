@@ -10,6 +10,12 @@ use Symfony\Component\HttpFoundation\Response;
 
 class UserController extends Controller
 {
+    public function me()
+    {
+        return response()->json([
+            'data' => Auth::user()
+        ], Response::HTTP_OK);
+    }
     /**
      * Display a listing of the resource.
      */
